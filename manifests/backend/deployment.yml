@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app-backend
+  name: app-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-backend
+  template:
+    metadata:
+      labels:
+        app: app-backend
+    spec:
+      containers:
+        - name: app-backend
+          image: "${CONTAINER_IMAGE}"
+          ports:
+            - containerPort: 8000
+          command: ["/bin/sh"]
+          args: ["-c", "uvicorn garcom.aplicacao.main:app --reload --host 0.0.0.0"]
+          env:
+            - name: DATABASE_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: DATABASE_URI
+            - name: DATABASE_TESTS
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: DATABASE_TESTS
+            - name: DSN_SENTRY
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: DSN_SENTRY
+            - name: SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: SECRET_KEY
+            - name: ALGORITHM
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: ALGORITHM
+            - name: TIPO_DE_CRIPTOGRAFIA
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: TIPO_DE_CRIPTOGRAFIA
+            - name: TEMPO_DE_EXPIRACAO
+              valueFrom:
+                configMapKeyRef:
+                  name: environments
+                  key: TEMPO_DE_EXPIRACAO
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
