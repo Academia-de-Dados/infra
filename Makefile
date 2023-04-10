@@ -1,5 +1,6 @@
 # ---------------------------- Kubernetes ----------------------------
 K8S_CLUSTER_NAME := academia-de-dados
+K8S_NAMESPACE := academia-de-dados
 
 .PHONY: k8s-cluster
 k8s-cluster:  ## Cria um cluster Kubernetes local usando 'nós' do contêiner Docker
@@ -8,6 +9,14 @@ k8s-cluster:  ## Cria um cluster Kubernetes local usando 'nós' do contêiner Do
 .PHONY: k8s-create
 k8s-create:  ## Cria os recursos dos manifestos kubernetes.
 	@ kubectl create --kustomize=manifests
+
+.PHONY: k8s-sh-backend
+k8s-sh-backend:
+	@ kubectl --namespace $(K8S_NAMESPACE) exec -it deployments/app-backend -- bash
+
+.PHONY: k8s-sh-pgsql
+k8s-sh-pgsql:
+	@ kubectl --namespace $(K8S_NAMESPACE) exec -it deployments/pgsql-backend -- bash
 
 
 # ---------------------------- Terraform ----------------------------
