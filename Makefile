@@ -41,7 +41,7 @@ tf-apply:  ## Cria ou atualiza a infraestrutura de acordo com as configurações
 	@ $(TF) apply -auto-approve $(TF_PLAN)
 
 .PHONY: tf-destroy
-tf-destroy:  ## Destroi a infraestrutura gerenciada pelo Terraform
+tf-destroy: tf-init  ## Destroi a infraestrutura gerenciada pelo Terraform
 	@ $(TF) destroy -auto-approve -var-file=$(TF_VAR_FILE)
 
 
