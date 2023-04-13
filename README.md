@@ -9,7 +9,7 @@
         <img alt="GPL-3.0 License" src="https://img.shields.io/github/license/Academia-de-Dados/infra">
     </a>
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Academia-de-Dados/infra">
-    <a href="https://github.com/Academia-de-Dados/crawlers/issues">
+    <a href="https://github.com/Academia-de-Dados/infra/issues">
         <img alt="GitHub issues" src="https://img.shields.io/github/issues/Academia-de-Dados/infra">
     </a>
 </p>
